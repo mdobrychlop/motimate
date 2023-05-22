@@ -1,6 +1,11 @@
 import os
 import openai
 
+# Morning page components:
+# Tasks summary (ystersay and today)
+# Journal summary (from?)
+# Habits summary
+# Weight and exercise and food?
 
 API_KEY = ''
 openai.organization = "org-W6nwVASQcVbcXRhmAMLdLRuL"
