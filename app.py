@@ -2,7 +2,7 @@ import os
 import openai
 
 
-API_KEY = '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'
+API_KEY = ''
 openai.organization = "org-W6nwVASQcVbcXRhmAMLdLRuL"
 
 openai.api_key = API_KEY
