@@ -48,6 +48,7 @@ response = openai.ChatCompletion.create(
             {"role": "user", "content": P},
     ])
 
+#BLA
 message = response.choices[0]['message']
 print("{}: {}".format(message['role'], message['content']))
   
