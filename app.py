@@ -1,5 +1,6 @@
 import os
 import openai
+from todoist_parser import Todoist_Content
 
 # Morning page components:
 # Tasks summary (ystersay and today)
@@ -35,6 +36,12 @@ def get_prompt_temporary():
 
 API_KEY = get_apikey()
 P = get_prompt_temporary()
+
+todoist_content = Todoist_Content()
+todoist_prompt_part = todoist_content.prompt
+
+P += "Here's an extract of my todoist tasks:\n"
+P += todoist_prompt_part
 
 openai.api_key = API_KEY
 
