@@ -1,6 +1,7 @@
 import os
 import openai
 from todoist_parser import Todoist_Content
+import datetime
 
 # Morning page components:
 # Tasks summary (ystersay and today)
@@ -32,16 +33,20 @@ def get_prompt_temporary():
             if 'prompt_end' in line:
                 end_index = lines.index(line)
     prompt = ''.join(lines[start_index+1:end_index])
+    # today is day of the week and date
+    datedata = "Today is " + datetime.datetime.today().strftime("%A, %d %B %Y") + ".\n"
+    #print(datedata)
+    prompt =  datedata + prompt
     return prompt
 
 API_KEY = get_apikey()
-P = get_prompt_temporary()
+mainprompt = get_prompt_temporary()
 
 todoist_content = Todoist_Content()
 todoist_prompt_part = todoist_content.prompt
 
-P += "Here's an extract of my todoist tasks:\n"
-P += todoist_prompt_part
+mainprompt += "Here's an extract of my todoist tasks:\n"
+mainprompt += todoist_prompt_part
 
 openai.api_key = API_KEY
 
@@ -52,7 +57,7 @@ response = openai.ChatCompletion.create(
     model=model_engine,
     messages=[
         {"role": "system", "content": "You are an assistant, a coach, an accountability partner."},
-            {"role": "user", "content": P},
+            {"role": "user", "content": mainprompt},
     ])
 
 #BLA
